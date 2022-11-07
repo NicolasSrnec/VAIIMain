@@ -39,4 +39,9 @@ class HomeController extends AControllerBase
     {
         return $this->html();
     }
+
+    public function food(): Response
+    {
+        return $this->html();
+    }
 }

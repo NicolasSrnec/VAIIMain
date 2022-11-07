@@ -1,28 +1,35 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <img src="public/images/vaiicko_logo.png">
-                <p>
-                    Gratulujeme vám, úspešne sa vám podarilo nainštalovať a spustiť framework <strong>Vaííčko</strong> <?= \App\Config\Configuration::FW_VERSION ?>!<br>
-                    Dúfame, že sa Vám pomocou totho frameworku vytvoríte nejakú skvelú aplikáciu.<br>
-                </p>
-                <p>
-                    Tento jednoduchý framework bol vytvorený pre lepšie pochopenie architektúry MVC.<br>
-                    Je určený pre študentov predmetu <em>vývoj aplikcií pre internet a intranet</em>, ale nielen im.
-                </p>
+
+<!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="public\images\carousel_introduction.jpg" alt="introduction" class="d-block w-100" height="800" width="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">The best you can find!</h5>
+                <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">Taste the best cooking in the area</p>
             </div>
         </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Autori</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-2022 Fakulta riadenia a informatiky, Katedra softvérových technológií
+        <div class="carousel-item">
+            <img src="public\images\carousel_delivery.jpg" alt="Delivery" class="d-block w-100" height="800" width="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">Lighting fast orders!</h5>
+                <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">We guarantee fast delivery service</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="public\images\carousel_rating.jpg" alt="Rating" class="d-block w-100" height="800" width="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">Rate us!</h5>
+                <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">We appreciate all of your feedback</p>
             </div>
         </div>
     </div>
