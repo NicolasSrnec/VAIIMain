@@ -5,3 +5,6 @@
 .navbar-brand img {
     width: 50px;
 }
+.card {
+    display:inline-block;
+}

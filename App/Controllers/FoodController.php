@@ -28,6 +28,7 @@ class FoodController extends AControllerBase
         $id = $this->request()->getValue('id');
         $foodToDelete = Food::getOne($id);
         if ($foodToDelete) {
+            unlink($foodToDelete->getImage());
             $foodToDelete->delete();
         }
         return $this->redirect("?c=food");
