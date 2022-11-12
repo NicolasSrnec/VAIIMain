@@ -1,6 +1,12 @@
 <?php
 
 namespace App\Auth;
+use App\Core\Responses\Response;
+use App\Models\User;
+use App\Core\DB\Connection;
+use App\Helpers\Inflect;
+use PDO;
+use PDOException;
 
 class LoginAuthenticator extends DummyAuthenticator
 {
@@ -13,12 +19,15 @@ class LoginAuthenticator extends DummyAuthenticator
      */
     function login($login, $password): bool
     {
-        if ($login == self::LOGIN && password_verify($password, self::PASSWORD_HASH)) {
-            $_SESSION['user'] = self::USERNAME;
-            return true;
-        } else {
-            return false;
-        }
+        $pr = Connection::connect()->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
+        $pr->execute([$login, $password]);
+        $user = $pr->fetchAll();
+        if ($user) {
+                $_SESSION['user'] = $login;
+                return true;
+            } else {
+                return false;
+            }
     }
 
 }

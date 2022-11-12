@@ -49,7 +49,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Login</a>
                 </li>
-            </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=user&a=create">Register</a>
+                </li>
         <?php } ?>
 
     </div>

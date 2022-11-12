@@ -1,4 +1,4 @@
-<form method="post" action="?c=food&a=store " enctype="multipart/form-data">
+<form method="post" action="?c=food&a=store" enctype="multipart/form-data">
     <label>
         Name:
         <input type="text" name="name">
