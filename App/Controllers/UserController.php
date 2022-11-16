@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\DB\Connection;
 use App\Core\Responses\Response;
 use App\Models\User;
 
@@ -33,21 +34,41 @@ class UserController extends AControllerBase
         return $this->redirect("?c=user");
     }
 
-    public function store() {
+    public function store()
+    {
         $user = new User();
-        $user->setUsername($this->request()->getValue('username'));
-        $user->setPassword($this->request()->getValue('password'));
-        $user->save();
-        return $this->redirect("?c=user");
+        $username = $this->test_input($this->request()->getValue('username'));
+        $user->setUsername($username);
+        $user->setPassword($this->test_input($this->request()->getValue('password')));
+        $filteredUser = User::getAll("username = ?", [ $username ]);
+        if ($filteredUser == null) {
+            $user->save();
+            return $this->redirect("?c=home");
+        } else {
+            return $this->redirect("?c=user&a=create&fail=true");
+        }
     }
 
     public function create() {
-        return $this->html(viewName: 'create.form');
+        $failed = $this->request()->getValue('fail');
+        if ($failed) {
+            $data = ['fail' => 'This username is already taken'];
+        } else {
+            $data = ['fail' => ''];
+        }
+        return $this->html($data, viewName: 'create.form');
     }
 
     public function edit() {
         $login = $this->request()->getValue('login');
         $userToEdit = User::getOne($login);
         return $this->html($userToEdit, viewName: 'create.form');
+    }
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

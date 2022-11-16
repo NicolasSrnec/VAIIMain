@@ -18,9 +18,9 @@
     <script src="public/js/script.js"></script>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="?c=home">
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark" style="background-color: black;">
+
+        <a class="navbar-brand" href="?c=home" style="padding-bottom: 0; padding-top: 0">
             <img src="public/images/navbar_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
                  title="<?= \App\Config\Configuration::APP_NAME ?>">
         </a>
@@ -54,12 +54,8 @@
                 </li>
         <?php } ?>
 
-    </div>
+
 </nav>
-<div class="container-fluid mt-3">
-    <div class="web-content">
-        <?= $contentHTML ?>
-    </div>
-</div>
+<?= $contentHTML ?>
 </body>
 </html>

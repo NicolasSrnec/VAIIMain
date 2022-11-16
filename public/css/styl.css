@@ -1,10 +1,70 @@
-.navbar {
-    border-bottom: 1px solid grey;
+
+
+p {
+    padding-top: 3vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    font-family: "Roboto Light"
+}
+h1 {
+    padding-top: 3vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    font-family: "Roboto Light"
+}
+h2 {
+    padding-top: 3vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    font-family: "Roboto Light"
+}
+h3 {
+    padding-top: 3vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    font-family: "Roboto Light";
+}
+h4 {
+    font-family: "Roboto Light";
+
 }
 
-.navbar-brand img {
-    width: 50px;
+body {
+    background-color: #8b1e06;
 }
-.card {
-    display:inline-block;
+.navbar-nav li a {
+    color: white !important;
+    font-family: "Bernard MT Condensed";
+    font-size: large;
+}
+
+.navbar-text {
+    color: white !important;
+    font-family: "Bernard MT Condensed";
+    font-size: large;
+}
+
+.navbar-custom {
+    background-color: black !important;
+}
+.navbar-custom .navbar-text {
+    color: azure !important;
+}
+.navbar-brand img {
+    width: 100px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.navbar-brand{
+    margin-inside: 0 !important;
+}
+
+
+.carousel {
+    padding-bottom: 0; !important;
+}
+
+.button {
+    padding-bottom: 10vh; !important;
 }

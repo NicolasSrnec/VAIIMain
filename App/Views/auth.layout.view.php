@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
             integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/styl.css">
+    <link rel="stylesheet" href="public/css/login.css">
     <script src="public/js/script.js"></script>
 </head>
 <body>
