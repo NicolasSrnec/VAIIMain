@@ -45,14 +45,14 @@ class CartController extends AControllerBase
                 $count = $cart->getCount();
                 $cart->setCount($count+1);
             }
-            return $this->redirect("?c=food");
+            return NULL;
         }
         $cart =  new Cart();
         $cart->setUsername($username);
         $cart->setFoodId($foodId);
         $cart->setCount(1);
         $cart->save();
-        return $this->redirect("?c=food");
+        return NULL;
     }
 
 
