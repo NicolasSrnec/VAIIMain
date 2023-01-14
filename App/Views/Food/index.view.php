@@ -11,7 +11,7 @@ use App\Models\Food;
 </div>
 <?php } ?>
 <?php } ?>
-<div id="txtHint">Customer info will be listed here...</div>
+
 <div class = "container content-align-center" style="margin: auto">
 <?php
 foreach ($data as $food) {
@@ -26,7 +26,7 @@ foreach ($data as $food) {
 
         <a href="?c=review&food=<?php echo $food->getId()?>" class="btn btn-primary">reviews</a>
         <?php if ($auth->isLogged()) { ?>
-            <a href="#" class="btn btn-primary" onclick="addItem(<?php echo $food->getId()?>,<?php echo $auth->getLoggedUserName()?>)">Add to cart</a>
+            <a href="#" class="btn btn-primary" onclick="addItem('<?php echo $food->getId()?>','<?php echo $auth->getLoggedUserName()?>','<?php echo $food->getName()?>','<?php echo $food->getPrice()?>')">Add to cart</a>
         <a href="?c=review&a=create&food=<?php echo $food->getId()?>" class="btn btn-primary">write review</a>
         <?php if ($auth->getLoggedUserName() == "admin") { ?>
         <a href="?c=food&a=delete&id=<?php echo $food->getId()?>" class="btn btn-danger">Delete</a>

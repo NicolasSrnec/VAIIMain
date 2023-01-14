@@ -10,6 +10,8 @@ class Cart extends Model
     protected $username;
     protected $food_id;
     protected $count;
+    protected $food_name;
+    protected $food_price;
 
     /**
      * @return mixed
@@ -75,6 +77,37 @@ class Cart extends Model
         $this->count = $count;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFoodName()
+    {
+        return $this->food_name;
+    }
+
+    /**
+     * @param mixed $food_name
+     */
+    public function setFoodName($food_name): void
+    {
+        $this->food_name = $food_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFoodPrice()
+    {
+        return $this->food_price;
+    }
+
+    /**
+     * @param mixed $food_price
+     */
+    public function setFoodPrice($food_price): void
+    {
+        $this->food_price = $food_price ;
+    }
 
 
 

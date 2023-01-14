@@ -29,6 +29,11 @@ h4 {
 
 }
 
+h6 {
+    font-family: "Roboto Light";
+    color: black;
+}
+
 body {
     background-color: #8b1e06;
 }
@@ -67,4 +72,56 @@ body {
 
 .button {
     padding-bottom: 10vh; !important;
+}
+
+#cartScreen {
+    visibility: hidden; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+#cartContent {
+    background-color: #fefefe;
+    z-index: 10;
+    width: 80vw;
+    margin: auto;
+
+}
+
+#cartCloseButton {
+    background-color: #fefefe;
+    z-index: 10;
+    width: 80vw;
+    margin: auto;
+
+}
+
+#cartButton {
+    background: none;
+    border: none;
+    font-family: "Bernard MT Condensed";
+    font-size: large;
+    color: white;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

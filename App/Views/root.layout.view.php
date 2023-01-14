@@ -39,7 +39,8 @@
         </ul>
         <?php if ($auth->isLogged()) { ?>
             <ul class="navbar-nav ms-auto">
-            <span class="navbar-text" <b><?= $auth->getLoggedUserName() ?></b></span>
+                    <button class="nav-link" id="cartButton" onclick="showCart('<?= $auth->getLoggedUserName() ?>')">Cart</button>
+            <span class="navbar-text"  <b><?= $auth->getLoggedUserName() ?></b></span>
                 <li class="nav-item">
                     <a class="nav-link" href="?c=auth&a=logout">Logout</a>
                 </li>
@@ -56,6 +57,14 @@
 
 
 </nav>
+<div class="container-fullwidth" id="cartScreen" >
+    <div class="row justify-content-center no-gutters" style="background-color: white;"id="cartCloseButton">
+        <span class="close"onclick="hideCart()">&times;</span>
+    </div>
+    <div class="row justify-content-center no-gutters" style="background-color: white;"id="cartContent">
+        <div id="txtHint">Customer info will be listed here...</div>
+    </div>
+</div>
 <?= $contentHTML ?>
 </body>
 </html>

@@ -19,8 +19,9 @@ class CartController extends AControllerBase
      */
     public function index(): Response
     {
-        $food = Cart::getAll();
-        return $this->html($food);
+        $username = $this->test_input($this->request()->getValue('userName'));
+        $food = Cart::getAll("username = ?", [ $username]);
+        return $this->json($food);
     }
 
 
@@ -39,20 +40,23 @@ class CartController extends AControllerBase
     public function store() {
         $username = $this->test_input($this->request()->getValue('userName'));
         $foodId = $this->test_input($this->request()->getValue('foodId'));
+        $foodName =$this->test_input($this->request()->getValue('foodName'));
+        $foodPrice = $this->test_input($this->request()->getValue('foodPrice'));
         $cartToMake = Cart::getAll("username = ? AND food_id = ?", [ $username,$foodId ]);
         if ($cartToMake) {
-            foreach ($cartToMake as $cart) {
-                $count = $cart->getCount();
-                $cart->setCount($count+1);
-            }
-            return NULL;
+            $count = $cartToMake[0]->getCount() + 1;
+            $cartToMake[0]->setCount($count);
+            $cartToMake[0]->save();
+            return $this->json($cartToMake[0]);
         }
         $cart =  new Cart();
         $cart->setUsername($username);
         $cart->setFoodId($foodId);
         $cart->setCount(1);
+        $cart->setFoodName($foodName);
+        $cart->setFoodPrice($foodPrice);
         $cart->save();
-        return NULL;
+        return $this->json($cart);
     }
 
 
