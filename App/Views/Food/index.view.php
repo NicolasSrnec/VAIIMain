@@ -13,29 +13,59 @@ use App\Models\Food;
 <?php } ?>
 
 <div class = "container content-align-center" style="margin: auto">
-<?php
-foreach ($data as $food) {
-?>
-    <div class="card" style="width: 30rem;margin-left: auto;margin-right: auto" id="<?php echo $food->getId()?>">
-        <?php if ($food->getImage()) { ?>
-  <img class="card-img-top" src="<?php echo $food->getImage()?>" alt="Card image cap">
-  <?php } ?>
-    <div class="card-body">
-    <h5 class="card-title"><?php echo $food->getName()?></h5>
-    <h6 class="card-subtitle"><?php echo $food->getPrice()?>$</h6>
 
-        <a href="?c=review&food=<?php echo $food->getId()?>" class="btn btn-primary">reviews</a>
-        <?php if ($auth->isLogged()) { ?>
-            <a href="#" class="btn btn-primary" onclick="addItem('<?php echo $food->getId()?>','<?php echo $auth->getLoggedUserName()?>','<?php echo $food->getName()?>','<?php echo $food->getPrice()?>')">Add to cart</a>
-        <a href="?c=review&a=create&food=<?php echo $food->getId()?>" class="btn btn-primary">write review</a>
-        <?php if ($auth->getLoggedUserName() == "admin") { ?>
-        <a href="?c=food&a=delete&id=<?php echo $food->getId()?>" class="btn btn-danger">Delete</a>
-                <a href="?c=food&a=edit&id=<?php echo $food->getId()?>" class="btn btn-danger">Update</a>
+    <?php
+    for ($x = 0; $x < sizeof($data); $x++) {
+        ?>
+    <div class="row justify-content-center no-gutters" >
+        <div class="col-lg-4" style="background-color: dimgray;" id="foodColumn">
+        <div class="card" style="width: 25vw;margin-left: auto;margin-right: auto" id="<?php echo $data[$x]->getId()?>">
+            <?php if ($data[$x]->getImage()) { ?>
+                <img class="card-img-top" src="<?php echo $data[$x]->getImage()?>" alt="Card image cap">
+            <?php } ?>
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $data[$x]->getName()?></h5>
+                <h6 class="card-subtitle"><?php echo $data[$x]->getPrice()?>$</h6>
 
-        <?php } ?>
-        <?php } ?>
-  </div>
+                <a href="?c=review&food=<?php echo $data[$x]->getId()?>" class="btn btn-primary">reviews</a>
+                <?php if ($auth->isLogged()) { ?>
+                    <a href="#" class="btn btn-primary" onclick="addItem('<?php echo $data[$x]->getId()?>','<?php echo $auth->getLoggedUserName()?>','<?php echo $data[$x]->getName()?>','<?php echo $data[$x]->getPrice()?>')">Add to cart</a>
+                    <a href="?c=review&a=create&food=<?php echo $data[$x]->getId()?>" class="btn btn-primary">write review</a>
+                    <?php if ($auth->getLoggedUserName() == "admin") { ?>
+                        <a href="?c=food&a=delete&id=<?php echo $data[$x]->getId()?>" class="btn btn-danger">Delete</a>
+                        <a href="?c=food&a=edit&id=<?php echo $data[$x]->getId()?>" class="btn btn-danger">Update</a>
+
+                    <?php } ?>
+                <?php } ?>
+            </div>
+            </div>
+        </div>
+        <?php if ($x+1 < sizeof($data)) { ?>
+        <div class="col-lg-4" style="background-color: dimgray;" id="foodColumn">
+            <div class="card" style="width: 25vw;margin-left: auto;margin-right: auto" id="<?php echo $data[$x+1]->getId()?>">
+                <?php if ($data[$x+1]->getImage()) { ?>
+                    <img class="card-img-top" src="<?php echo $data[$x+1]->getImage()?>" alt="Card image cap">
+                <?php } ?>
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $data[$x+1]->getName()?></h5>
+                    <h6 class="card-subtitle"><?php echo $data[$x+1]->getPrice()?>$</h6>
+
+                    <a href="?c=review&food=<?php echo $data[$x+1]->getId()?>" class="btn btn-primary">reviews</a>
+                    <?php if ($auth->isLogged()) { ?>
+                        <a href="#" class="btn btn-primary" onclick="addItem('<?php echo $data[$x+1]->getId()?>','<?php echo $auth->getLoggedUserName()?>','<?php echo $data[$x+1]->getName()?>','<?php echo $data[$x+1]->getPrice()?>')">Add to cart</a>
+                        <a href="?c=review&a=create&food=<?php echo $data[$x+1]->getId()?>" class="btn btn-primary">write review</a>
+                        <?php if ($auth->getLoggedUserName() == "admin") { ?>
+                            <a href="?c=food&a=delete&id=<?php echo $data[$x+1]->getId()?>" class="btn btn-danger">Delete</a>
+                            <a href="?c=food&a=edit&id=<?php echo $data[$x+1]->getId()?>" class="btn btn-danger">Update</a>
+
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <?php $x++; } ?>
+
     </div>
-<?php } ?>
+    <?php } ?>
 </div>
 

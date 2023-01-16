@@ -78,7 +78,7 @@ function addItem(id,username,foodName,foodPrice) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("txtHint").innerHTML += this.responseText.username;
+            //document.getElementById("txtHint").innerHTML += this.responseText.username;
         }
     };
     xhttp.open("POST", "?c=cart&a=store&userName="+username+"&foodId="+id+"&foodName="+foodName+"&foodPrice="+foodPrice, true);
@@ -93,15 +93,24 @@ function showCart(username) {
         if (this.readyState == 4 && this.status == 200) {
             const myObj = JSON.parse(this.responseText);
             let text = "";
+            let total = 0;
             for (let x in myObj) {
-                text += '<div class="card" style="width: 30rem;margin-left: auto;margin-right: auto">' +
-                            '<div class="card-body">' +
-                                '<h5 class="card-title ">' + myObj[x].food_name + '</h5>' +
-                                '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">' + myObj[x].food_price + '</p>' +
-                                '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">' + myObj[x].count + 'x' + '</p>' +
-                            '</div>'
+                text += '<div class="row " style="background-color: white;"id="cartContent">' +
+                            '<div class="col-sm-4" id="cartText" >' + myObj[x].food_name + '</div>' +
+                            '<div class="col-sm-4" id="cartText">' + myObj[x].food_price +'$' +'</div>' +
+                            '<div class="col-sm-4" id="cartText">' + myObj[x].count + 'x' + '</div>' +
+                            '<div class="col-sm-4" id="cartText"> ' +
+                                '<a href="#" class="btn btn-primary" onclick="removeItem('+ "'" + username + "'" + "," + "'" + myObj[x].food_id + "'" +')">-</a> ' +
+                                '<a href="#" class="btn btn-primary" onclick="addItemToCart('+ "'" + myObj[x].food_id + "'" + "," + "'" + username + "'" + "," +"' '"+ "," + "'0'" +')">+</a> ' +
+                            '</div>' +
                         '</div>';
+                total += myObj[x].food_price * myObj[x].count;
             }
+            total = Math.round(total * 100) / 100;
+            text += '<div class="row " style="background-color: white;"id="cartContent">' +
+                '<div class="col-sm-4" id="cartText">Total: ' + total + '$'+ '</div>' +
+                '</div>';
+            text+= '<a class="btn btn-primary">Order</a>';
             document.getElementById("cartContent").innerHTML = text;
         }
     };
@@ -113,6 +122,23 @@ function showCart(username) {
 function hideCart() {
     var cartScreen = document.getElementById("cartScreen");
     cartScreen.style.visibility = "hidden";
+}
+
+function removeItem(username,id) {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            showCart(username);
+        }
+    }
+    xhttp.open("POST", "?c=cart&a=delete&userName=" +username+"&foodId="+id , true);
+    xhttp.send();
+}
+
+
+function addItemToCart(id,username,foodName,foodPrice) {
+    addItem(id,username,foodName,foodPrice);
+    showCart(username);
 }
 
 

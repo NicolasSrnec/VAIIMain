@@ -27,14 +27,19 @@ class CartController extends AControllerBase
 
     public function delete() {
 
-        $name = $this->request()->getValue('name');
-        $cartToDelete = Cart::getAll("username = ?", [ $name ]);
+        $username = $this->test_input($this->request()->getValue('userName'));
+        $foodId = $this->test_input($this->request()->getValue('foodId'));
+        $cartToDelete = Cart::getAll("username = ? AND food_id = ?", [ $username,$foodId ]);;
         if ($cartToDelete) {
-           foreach ($cartToDelete as $cart) {
-               $cart->delete();
-           }
+            $count = $cartToDelete[0]->getCount() - 1;
+            if ($count <= 0) {
+                $cartToDelete[0]->delete();
+            } else {
+                $cartToDelete[0]->setCount($count);
+            }
+            $cartToDelete[0]->save();
         }
-        return $this->redirect("?c=food");
+        return $this->json($cartToDelete);
     }
 
     public function store() {

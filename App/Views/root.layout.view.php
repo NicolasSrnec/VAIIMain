@@ -16,13 +16,13 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/styl.css">
     <script src="public/js/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <nav class="navbar sticky-top navbar-expand-sm navbar-dark" style="background-color: black;">
 
         <a class="navbar-brand" href="?c=home" style="padding-bottom: 0; padding-top: 0">
-            <img src="public/images/navbar_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
-                 title="<?= \App\Config\Configuration::APP_NAME ?>">
+            <img src="public/images/navbar_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>" >
         </a>
 
         <ul class="navbar-nav me-auto">
@@ -62,7 +62,6 @@
         <span class="close"onclick="hideCart()">&times;</span>
     </div>
     <div class="row justify-content-center no-gutters" style="background-color: white;"id="cartContent">
-        <div id="txtHint">Customer info will be listed here...</div>
     </div>
 </div>
 <?= $contentHTML ?>

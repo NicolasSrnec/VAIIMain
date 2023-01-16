@@ -19,15 +19,17 @@ class LoginAuthenticator extends DummyAuthenticator
      */
     function login($login, $password): bool
     {
-        $pr = Connection::connect()->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
-        $pr->execute([$login, $password]);
-        $user = $pr->fetchAll();
-        if ($user) {
+        $filteredUser = User::getAll("username = ?", [ $login ]);
+        if ($filteredUser) {
+            $passwordHashed = $filteredUser[0]->getPassword();
+            if(password_verify($password, $passwordHashed)) {
                 $_SESSION['user'] = $login;
                 return true;
-            } else {
-                return false;
             }
+        } else {
+                return false;
+        }
+        return false;
     }
 
 }

@@ -27,7 +27,6 @@ $layout = 'auth';
                         </div>
 
                     </form>
-                    <a href="?c=home">Go back home</a>
                 </div>
             </div>
         </div>

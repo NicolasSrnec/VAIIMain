@@ -39,7 +39,9 @@ class UserController extends AControllerBase
         $user = new User();
         $username = $this->test_input($this->request()->getValue('username'));
         $user->setUsername($username);
-        $user->setPassword($this->test_input($this->request()->getValue('password')));
+        $password = $this->test_input($this->request()->getValue('password'));
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $user->setPassword($hashedPassword);
         $filteredUser = User::getAll("username = ?", [ $username ]);
         if ($filteredUser == null) {
             $user->save();
