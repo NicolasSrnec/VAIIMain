@@ -207,16 +207,22 @@ function addItemToCart(id,username,foodName,foodPrice) {
 
 
 function register() {
-
-
+    var nameInput = document.getElementById("nameInput");
+    var passwordInput = document.getElementById("passwordInput");
     var xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            showCart(username);
+            const myObj = JSON.parse(this.responseText);
+            alert(myObj);
+            if (myObj == "Success!") {
+                nameInput.value = "";
+                passwordInput.value = "";
+            }
+
         }
     };
-    xhttp.open("POST", "?c=cart&a=store&userName="+username+"&foodId="+id+"&foodName="+foodName+"&foodPrice="+foodPrice, true);
+    xhttp.open("POST", "?c=user&a=store&username="+ nameInput.value + "&password="+passwordInput.value, true);
     xhttp.send();
 }
 

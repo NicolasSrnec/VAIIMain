@@ -45,9 +45,13 @@ class UserController extends AControllerBase
         $filteredUser = User::getAll("username = ?", [ $username ]);
         if ($filteredUser == null) {
             $user->save();
-            return $this->redirect("?c=home");
+            $data = "Success!";
+            return $this->json($data);
+            //return $this->redirect("?c=home");
         } else {
-            return $this->redirect("?c=user&a=create&fail=true");
+            $data = "This username is already taken!";
+            return $this->json($data);
+            //return $this->redirect("?c=user&a=create&fail=true");
         }
     }
 

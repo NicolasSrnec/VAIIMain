@@ -36,7 +36,7 @@
             <a class="nav-link" href="?c=home&a=contact">Contact</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="?c=food">Order</a>
+            <a class="nav-link" href="?c=food&type=burger">Order</a>
         </li>
 
     </ul>

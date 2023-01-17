@@ -24,7 +24,7 @@
                                 <label class="form-label" for="form3Example3cg">Your password</label>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <input id ="registerButton" type="submit" value ="Register"
+                                <input id ="registerButton"  value ="Register" onclick="register()"
                                         class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"</input>
                             </div>
                             <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="?c=auth&a=login"

@@ -34,6 +34,9 @@
                         <?php } else { ?>
                             Reserved
                         <?php }?></p>
+                    <p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;"> <?php if ($auth->getLoggedUserName() == "admin") {?>
+                            <a href="?c=reservation&a=unreserve&res_id=<?php echo $data[$x+1]->getid()?>" class="btn btn-warning">Unreserve</a>
+                        <?php }?></p>
                 </div>
             </div>
         </div>
