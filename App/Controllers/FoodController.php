@@ -19,7 +19,9 @@ class FoodController extends AControllerBase
      */
     public function index(): Response
     {
-        $food = Food::getAll();
+        $type = $this->request()->getValue('type');
+        $food = Food::getAll("type = ?", [ $type]);
+        //$food = Food::getAll();
         return $this->html($food);
     }
 
@@ -32,19 +34,20 @@ class FoodController extends AControllerBase
             unlink($foodToDelete->getImage());
             $foodToDelete->delete();
         }
-        return $this->redirect("?c=food");
+        return $this->redirect("?c=food&type=burger");
     }
 
     public function store() {
         $food =  new Food();
         $food->setName($this->test_input($this->request()->getValue('name')));
         $food->setPrice($this->test_input($this->request()->getValue('price')));
+        $food->setType($this->test_input($this->request()->getValue('type')));
         $files = $this->request()->getFiles();
         $target_file = "public/images/" . basename($files["image"]["name"]);
         move_uploaded_file($files["image"]["tmp_name"], $target_file);
         $food->setImage($target_file);
         $food->save();
-        return $this->redirect("?c=food");
+        return $this->redirect("?c=food&type=burger");
     }
 
     public function create() {
@@ -76,7 +79,7 @@ class FoodController extends AControllerBase
             $foodToEdit->setImage($target_file);
         }
         $foodToEdit->save();
-        return $this->redirect("?c=food");
+        return $this->redirect("?c=food&type=burger");
 
     }
 

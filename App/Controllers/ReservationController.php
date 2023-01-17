@@ -5,14 +5,14 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\DB\Connection;
 use App\Core\Responses\Response;
-use App\Models\Review;
+use App\Models\Reservation;
 
 /**
  * Class HomeController
  * Example class of a controller
  * @package App\Controllers
  */
-class ReviewController extends AControllerBase
+class ReservationController extends AControllerBase
 {
     /**
      * Example of an action (authorization needed)
@@ -20,15 +20,14 @@ class ReviewController extends AControllerBase
      */
     public function index(): Response
     {
-        $food = $this->request()->getValue('food');
-        $filteredReviews = Review::getAll("foodId = ?", [ $food ]);
-        return $this->html($filteredReviews);
+        $filteredReservations = Reservation::getAll();
+        return $this->html($filteredReservations);
     }
 
     public function delete() {
 
         $id = $this->request()->getValue('id');
-        $foodToDelete = Food::getOne($id);
+        $foodToDelete = Reservation::getOne($id);
         if ($foodToDelete) {
             unlink($foodToDelete->getImage());
             $foodToDelete->delete();
@@ -66,15 +65,41 @@ class ReviewController extends AControllerBase
         }
         return $this->html($data, viewName: 'create.form');
     }
-   public function getUserReviews() {
-       $userName = $this->test_input($this->request()->getValue('userName'));
-       $reviews = Review::getAll("username = ?", [ $userName]);
-       return $this->json($reviews);
 
-   }
+
+
+    public function reserve() {
+        $id = $this->request()->getValue('res_id');
+        $name =$this->test_input($this->request()->getValue('res_username'));
+        $resCheck = Reservation::getAll("res_username = ?", [ $name]);
+        $resToEdit = Reservation::getOne($id);
+        if  ($resToEdit->getReserved() == 0 && !$resCheck) {
+            $resToEdit->setResUserName($name);
+            $resToEdit->setReserved(1);
+        }
+        $resToEdit->save();
+        return $this->redirect("?c=reservation");
+
+    }
+
+    public function Unreserve() {
+        $id = $this->request()->getValue('res_id');
+        $resToEdit = Reservation::getOne($id);
+        $resToEdit->setResUserName("");
+        $resToEdit->setReserved(0);
+        $resToEdit->save();
+        return $this->redirect("?c=reservation");
+
+    }
+    public function getUserReviews() {
+        $userName = $this->test_input($this->request()->getValue('userName'));
+        $reviews = Reservation::getAll("username = ?", [ $userName]);
+        return $this->json($reviews);
+
+    }
     public function edit() {
         $id = $this->request()->getValue('id');
-        $foodToEdit = Food::getOne($id);
+        $foodToEdit = Reservation::getOne($id);
         return $this->html($foodToEdit, viewName: 'create.form');
     }
     function test_input($data) {

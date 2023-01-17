@@ -17,7 +17,7 @@ use App\Models\Food;
                             <h6 class="mb-0">Food name</h6>
                         </div>
                         <div class="col-md-9 pe-5">
-                            <input type="text"name = "name" class="form-control form-control-lg" />
+                            <input type="text" name = "name" class="form-control form-control-lg" />
                         </div>
                     </div>
                     <hr class="mx-n3">
@@ -36,6 +36,19 @@ use App\Models\Food;
                         </div>
                         <div class="col-md-9 pe-5">
                             <input class="form-control form-control-lg" name="image" type="file" />
+                        </div>
+                    </div>
+                    <hr class="mx-n3">
+                    <div class="row align-items-center py-3">
+                        <div class="col-md-3 ps-5">
+                            <h6 class="mb-0">Select food type</h6>
+                        </div>
+                        <div class="col-md-9 pe-5">
+                            <select type="string" name="type">
+                                <option value="burger">burger</option>
+                                <option value="pizza">pizza</option>
+                                <option value="drink">drink</option>
+                            </select>
                         </div>
                     </div>
                     <hr class="mx-n3">

@@ -12,6 +12,7 @@ class Cart extends Model
     protected $count;
     protected $food_name;
     protected $food_price;
+    protected $order_date;
 
     /**
      * @return mixed
@@ -107,6 +108,22 @@ class Cart extends Model
     public function setFoodPrice($food_price): void
     {
         $this->food_price = $food_price ;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderDate()
+    {
+        return $this->food_price;
+    }
+
+    /**
+     * @param mixed $order_date
+     */
+    public function setOrderDate(mixed $order_date): void
+    {
+        $this->order_date = $order_date ;
     }
 
 

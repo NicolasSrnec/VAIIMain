@@ -23,7 +23,7 @@ class Review extends Model
      */
     public function setid($id): void
     {
-        $this->userName = $id;
+        $this->id = $id;
     }
     /**
      * @return mixed

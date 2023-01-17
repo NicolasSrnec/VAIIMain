@@ -4,7 +4,8 @@ p {
     padding-top: 3vh;
     padding-left: 10vw;
     padding-right: 10vw;
-    font-family: "Roboto Light"
+    font-family: "Roboto Light";
+    font-size: 2vh;
 }
 h1 {
     padding-top: 3vh;
@@ -27,6 +28,12 @@ h3 {
 h4 {
     font-family: "Roboto Light";
 
+}
+
+h5 {
+    color: black;
+    font-family: "Roboto Light";
+    font-size: 2vw;
 }
 
 h6 {
@@ -139,7 +146,7 @@ body {
     height: 60vh;
 }
 
-.btn-primary {
+.btn-primary .btn-danger {
     margin-top: 2vh;
 }
 

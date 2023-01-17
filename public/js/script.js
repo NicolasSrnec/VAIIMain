@@ -1,3 +1,58 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var element = document.getElementById("usernameLink");
+    showReviews(element.textContent);
+    showOrders(element.textContent);
+});
+
+function showReviews(username) {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const myObj = JSON.parse(this.responseText);
+            let text = "";
+            for (let x in myObj) {
+                text += '<div class="card" style="width: 25vw;margin-left: auto;margin-right: auto">'+
+                    '<div class="card-body">' +
+                        '<h5 class="card-title ">Posted by: ' + myObj[x].userName + '</h5>' +
+                        '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">Rating: ' + myObj[x].rating +  '</p>' +
+                        '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">Comment: '+ myObj[x].comment +'</p>' +
+                    '</div>'+
+                '</div>';
+            }
+            document.getElementById("reviewField").innerHTML = text;
+        }
+    }
+    xhttp.open("POST", "?c=review&a=getUserReviews&userName=" +username, true);
+    xhttp.send();
+}
+
+function showOrders(username) {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const myObj = JSON.parse(this.responseText);
+            let text = "";
+            for (let x in myObj) {
+                text += '<div class="card" style="width: 25vw;margin-left: auto;margin-right: auto">'+
+                    '<div class="card-body">' +
+                    '<h5 class="card-title ">Ordered on: ' + myObj[x].order_date + '</h5>' +
+                    '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">'+ myObj[x].food_name + "   " + myObj[x].count+"x" +  '</p>' +
+                    '<p class="card-text" style="padding-top: 0;padding-left: 0;padding-right: 0;">Price: '+ myObj[x].count * myObj[x].food_price + "$" +'</p>' +
+                    '</div>'+
+                    '</div>';
+            }
+            document.getElementById("orderField").innerHTML = text;
+        }
+    }
+    xhttp.open("POST", "?c=cart&a=getUserOrders&userName=" +username, true);
+    xhttp.send();
+
+
+}
+
+
+
+
 window.onload = function () {
     let name = document.getElementById("nameInput");
     let password = document.getElementById('passwordInput');
@@ -8,6 +63,7 @@ window.onload = function () {
     let passed = 0;
     let passwordError = "";
     button.style.visibility = 'hidden';
+
     form.addEventListener("input",formCheck );
 
 
@@ -107,10 +163,10 @@ function showCart(username) {
                 total += myObj[x].food_price * myObj[x].count;
             }
             total = Math.round(total * 100) / 100;
-            text += '<div class="row " style="background-color: white;"id="cartContent">' +
+            text += '<div class="row " style="background-color: white;" id="cartContent">' +
                 '<div class="col-sm-4" id="cartText">Total: ' + total + '$'+ '</div>' +
                 '</div>';
-            text+= '<a class="btn btn-primary">Order</a>';
+            text+= '<a href="?c=cart&a=order&userName=' + username + '" class="btn btn-primary">Order</a>';
             document.getElementById("cartContent").innerHTML = text;
         }
     };
@@ -137,8 +193,31 @@ function removeItem(username,id) {
 
 
 function addItemToCart(id,username,foodName,foodPrice) {
-    addItem(id,username,foodName,foodPrice);
-    showCart(username);
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            showCart(username);
+        }
+    };
+    xhttp.open("POST", "?c=cart&a=store&userName="+username+"&foodId="+id+"&foodName="+foodName+"&foodPrice="+foodPrice, true);
+    xhttp.send();
+}
+
+
+function register() {
+
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            showCart(username);
+        }
+    };
+    xhttp.open("POST", "?c=cart&a=store&userName="+username+"&foodId="+id+"&foodName="+foodName+"&foodPrice="+foodPrice, true);
+    xhttp.send();
 }
 
 

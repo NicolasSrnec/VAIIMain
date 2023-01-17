@@ -20,8 +20,16 @@ class CartController extends AControllerBase
     public function index(): Response
     {
         $username = $this->test_input($this->request()->getValue('userName'));
-        $food = Cart::getAll("username = ?", [ $username]);
+        $food = Cart::getAll("username = ? AND order_date = ?", [ $username,"0"]);
         return $this->json($food);
+    }
+
+
+    public function getUserOrders() {
+        $username = $this->test_input($this->request()->getValue('userName'));
+        $orders = Cart::getAll("username = ? AND order_date != ?", [ $username,"0"]);
+        return $this->json($orders);
+
     }
 
 
@@ -29,7 +37,7 @@ class CartController extends AControllerBase
 
         $username = $this->test_input($this->request()->getValue('userName'));
         $foodId = $this->test_input($this->request()->getValue('foodId'));
-        $cartToDelete = Cart::getAll("username = ? AND food_id = ?", [ $username,$foodId ]);;
+        $cartToDelete = Cart::getAll("username = ? AND food_id = ?", [ $username,$foodId ]);
         if ($cartToDelete) {
             $count = $cartToDelete[0]->getCount() - 1;
             if ($count <= 0) {
@@ -47,7 +55,7 @@ class CartController extends AControllerBase
         $foodId = $this->test_input($this->request()->getValue('foodId'));
         $foodName =$this->test_input($this->request()->getValue('foodName'));
         $foodPrice = $this->test_input($this->request()->getValue('foodPrice'));
-        $cartToMake = Cart::getAll("username = ? AND food_id = ?", [ $username,$foodId ]);
+        $cartToMake = Cart::getAll("username = ? AND food_id = ? AND order_date = ?", [ $username,$foodId,"0" ]);
         if ($cartToMake) {
             $count = $cartToMake[0]->getCount() + 1;
             $cartToMake[0]->setCount($count);
@@ -60,11 +68,23 @@ class CartController extends AControllerBase
         $cart->setCount(1);
         $cart->setFoodName($foodName);
         $cart->setFoodPrice($foodPrice);
+        $cart->setOrderDate("0");
         $cart->save();
         return $this->json($cart);
     }
 
-
+    public function order() {
+        $username = $this->test_input($this->request()->getValue('userName'));
+        $cartToOrder = Cart::getAll("username = ? AND order_date = ?", [ $username,0 ]);
+        $date = date('m/d/Y h:i:s a', time());
+        if ($cartToOrder) {
+            foreach ($cartToOrder as $cart ) {
+                $cart->setOrderDate($date);
+                $cart->save();
+            }
+        }
+        return $this->redirect("?c=user");
+    }
     public function update() {
         $id = $this->request()->getValue('id');
         $name =$this->test_input($this->request()->getValue('name'));

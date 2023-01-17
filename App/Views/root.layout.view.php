@@ -33,14 +33,21 @@
                 <a class="nav-link" href="?c=home&a=contact">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?c=food">Order</a>
+                <a class="nav-link" href="?c=food&type=burger">Order</a>
             </li>
+
 
         </ul>
         <?php if ($auth->isLogged()) { ?>
             <ul class="navbar-nav ms-auto">
                     <button class="nav-link" id="cartButton" onclick="showCart('<?= $auth->getLoggedUserName() ?>')">Cart</button>
-            <span class="navbar-text"  <b><?= $auth->getLoggedUserName() ?></b></span>
+            <span class="navbar-text">  </span>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=reservation">Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=user" id="usernameLink" ><?= $auth->getLoggedUserName() ?></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?c=auth&a=logout">Logout</a>
                 </li>

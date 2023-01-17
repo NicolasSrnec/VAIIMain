@@ -10,6 +10,7 @@ class Food extends Model
     protected $name;
     protected $price;
     protected $image;
+    protected $type;
 
     /**
      * @return mixed
@@ -73,6 +74,22 @@ class Food extends Model
     public function setImage($image): void
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 
 

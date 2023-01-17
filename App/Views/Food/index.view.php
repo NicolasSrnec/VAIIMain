@@ -13,12 +13,19 @@ use App\Models\Food;
 <?php } ?>
 
 <div class = "container content-align-center" style="margin: auto">
-
+    <div class="row justify-content-center" >
+        <div class="col " style="background-color: white;" align="center" id="foodColumn"> <a href="?c=food&type=burger" class="btn btn-primary"> Burgers</a>
+        </div>
+        <div class="col " style="background-color: white;" align="center" id="foodColumn"> <a href="?c=food&type=pizza" class="btn btn-primary"> Pizza</a>
+        </div>
+        <div class="col " style="background-color: white;" align="center" id="foodColumn"> <a href="?c=food&type=drink" class="btn btn-primary"> Drinks</a>
+        </div>
+    </div>
     <?php
     for ($x = 0; $x < sizeof($data); $x++) {
         ?>
     <div class="row justify-content-center no-gutters" >
-        <div class="col-lg-4" style="background-color: dimgray;" id="foodColumn">
+        <div class="col" style="background-color: dimgray;" id="foodColumn">
         <div class="card" style="width: 25vw;margin-left: auto;margin-right: auto" id="<?php echo $data[$x]->getId()?>">
             <?php if ($data[$x]->getImage()) { ?>
                 <img class="card-img-top" src="<?php echo $data[$x]->getImage()?>" alt="Card image cap">
@@ -41,7 +48,7 @@ use App\Models\Food;
             </div>
         </div>
         <?php if ($x+1 < sizeof($data)) { ?>
-        <div class="col-lg-4" style="background-color: dimgray;" id="foodColumn">
+        <div class="col" style="background-color: dimgray;" id="foodColumn">
             <div class="card" style="width: 25vw;margin-left: auto;margin-right: auto" id="<?php echo $data[$x+1]->getId()?>">
                 <?php if ($data[$x+1]->getImage()) { ?>
                     <img class="card-img-top" src="<?php echo $data[$x+1]->getImage()?>" alt="Card image cap">
